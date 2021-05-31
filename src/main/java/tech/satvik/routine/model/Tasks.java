@@ -1,5 +1,9 @@
 package tech.satvik.routine.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,11 +18,12 @@ public class Tasks implements Serializable {
     private String description;
     private int duration;
     @Column(nullable = false)
-    private Date StartTime;
-    private Date EndTime;
+    private Date startTime;
+    private Date endTime;
     private int priority;
     @Column(nullable = false)
     private boolean isCompleted;
+
 
     public Tasks() {
     }
@@ -28,14 +33,22 @@ public class Tasks implements Serializable {
         this.taskName = taskName;
         this.description = description;
         this.duration = duration;
-        StartTime = startTime;
-        EndTime = endTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.priority = priority;
         this.isCompleted = isCompleted;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     public void setId(Long id) {
@@ -67,19 +80,19 @@ public class Tasks implements Serializable {
     }
 
     public Date getStartTime() {
-        return StartTime;
+        return startTime;
     }
 
     public void setStartTime(Date startTime) {
-        StartTime = startTime;
+        this.startTime = startTime;
     }
 
     public Date getEndTime() {
-        return EndTime;
+        return endTime;
     }
 
     public void setEndTime(Date endTime) {
-        EndTime = endTime;
+        this.endTime = endTime;
     }
 
     public int getPriority() {
@@ -90,13 +103,7 @@ public class Tasks implements Serializable {
         this.priority = priority;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
 
     @Override
     public String toString() {
@@ -105,8 +112,8 @@ public class Tasks implements Serializable {
                 ", taskName='" + taskName + '\'' +
                 ", description='" + description + '\'' +
                 ", duration=" + duration +
-                ", StartTime=" + StartTime +
-                ", EndTime=" + EndTime +
+                ", StartTime=" + startTime +
+                ", EndTime=" + endTime +
                 ", Priority=" + priority +
                 ", isCompleted=" + isCompleted +
                 '}';

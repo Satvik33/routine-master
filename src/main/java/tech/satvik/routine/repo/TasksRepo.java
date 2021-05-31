@@ -11,6 +11,11 @@ public interface TasksRepo extends JpaRepository<Tasks, Long> {
     void deleteTaskById(Long id);
 
     Optional<Tasks> findTaskById(Long id);
-    @Query("FROM Tasks ORDER BY priority ASC")
+    @Query("FROM Tasks WHERE isCompleted = false ORDER BY priority ASC")
     List<Tasks> findTasksbyPriority();
+
+
+    Optional<Tasks> findTaskByTaskName(String taskName);
+
+    List<Tasks> findAllByOrderByStartTimeDesc();
 }

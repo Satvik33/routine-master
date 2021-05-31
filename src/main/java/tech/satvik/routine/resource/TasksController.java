@@ -19,25 +19,31 @@ public class TasksController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Tasks>> getAllEmployees () {
+    public ResponseEntity<List<Tasks>> getAllTasks () {
         List<Tasks> tasks = tasksService.findAllTasks();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/priority")
-    public ResponseEntity<List<Tasks>> getEmployeesByPriority () {
+    public ResponseEntity<List<Tasks>> getTasksByPriority () {
         List<Tasks> tasks = tasksService.findAllTasksByPriority();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Tasks> getEmployeeById (@PathVariable("id") Long id) {
+    public ResponseEntity<Tasks> getTaskById (@PathVariable("id") Long id) {
         Tasks tasks = tasksService.findTaskById(id);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
+    @GetMapping("/find/task/{taskName}")
+    public ResponseEntity<Tasks> getTaskByName (@PathVariable("taskName") String taskName) {
+        Tasks tasks = tasksService.findTaskByTaskName(taskName);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<Tasks> addEmployee(@RequestBody Tasks tasks) {
+    public ResponseEntity<Tasks> addTask(@RequestBody Tasks tasks) {
         Tasks newTasks = tasksService.addTask(tasks);
         return new ResponseEntity<>(newTasks, HttpStatus.CREATED);
     }
